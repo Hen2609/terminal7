@@ -563,7 +563,12 @@ export class Pane extends Cell {
             f = () => this.gate.newTab()
             break
         case "r":
-            f = () => this.gate.reset()
+            if(ev.shiftKey){
+                this.layout.cells.forEach(c => console.log(c))
+                f = () => this.layout.changeDir()
+            }else {
+                f = () => this.gate.reset()
+            }
             break
         // this key is at terminal level
         case "l":
@@ -576,7 +581,25 @@ export class Pane extends Cell {
             f = () => this.w.moveFocus("right")
             break
         case "ArrowUp":
-            f = () => this.w.moveFocus("up")
+            if(ev.shiftKey){
+                console.log('this',this)
+                const pane = this.w.getPane("up")
+                if(!pane) return;
+                // const oldxoff =  pane.xoff
+                // const oldyoff = pane.yoff
+                // const oldsy = pane.sy
+                // const oldsx = pane.sx
+                // pane.xoff = this.xoff
+                // pane.yoff = this.yoff
+                // pane.sy = this.sy
+                // pane.sx = this.sx
+                // this.xoff = oldxoff
+                // this.yoff = oldyoff
+                // this.sy = oldsy
+                // this.sx = oldsx
+            }else {
+                f = () => this.w.moveFocus("up")
+            }
             break
         case "ArrowDown":
             f = () => this.w.moveFocus("down")

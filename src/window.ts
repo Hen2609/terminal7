@@ -182,7 +182,7 @@ export class Window {
         if (this.rootLayout)
             this.rootLayout.fit()
     }
-    moveFocus(where) {
+    getPane(where){
         const a = this.activeP,
             b = a.t.buffer.active,
             x = a.xoff + b.cursorX * a.sx / a.t.cols,
@@ -213,11 +213,21 @@ export class Window {
                 if (match(c))
                     nextPane = c
         })
+        return nextPane
+    }
+
+    moveFocus(where) {
+        const nextPane = this.getPane(where)
         if (nextPane) {
             nextPane.focus()
             this.gate.sendState()
         }
     }
+
+    switchPane(where){
+        console.log(this.activeP)
+    }
+µµ
     updateDivideButtons() {
         const bV = document.getElementById("divide-v")
         const bH = document.getElementById("divide-h")
