@@ -387,12 +387,12 @@ export class Layout extends Cell {
             c.xoff = oldYoff
             c.sx = oldSy
             c.sy = oldSx
-            console.log('c',{
-                xoff: c.xoff,
-                yoff: c.yoff,
-                sx: c.sx,
-                sy: c.sy,
-            })
+            // console.log('c',{
+            //     xoff: c.xoff,
+            //     yoff: c.yoff,
+            //     sx: c.sx,
+            //     sy: c.sy,
+            // })
             if(keepYoff){
                 c.yoff = this.yoff + cellSize * i
                 c.xoff = this.xoff
@@ -404,18 +404,19 @@ export class Layout extends Cell {
                 c.sy = this.sy
                 c.sx = cellSize
             }
-            console.log('c2',{
-                xoff: c.xoff,
-                yoff: c.yoff,
-                sx: c.sx,
-                sy: c.sy,
-            })
+            // console.log('c2',{
+            //     xoff: c.xoff,
+            //     yoff: c.yoff,
+            //     sx: c.sx,
+            //     sy: c.sy,
+            // })
         });
         this.dir = newDir
+        this.refreshDividers()
         if(this.dir === parentDir){
             const replaceIndex = this.layout.cells.findIndex(c => c.id === this.id)
             this.layout.cells.splice(replaceIndex, 1, ...this.cells)
+            this.layout.refreshDividers()
         }
-        console.log(this.w.rootLayout)
     }
 }

@@ -275,5 +275,33 @@ export class Window {
         newLayout.refreshDividers()
         return newLayout
     }
+    swapPanes(pane1: Pane, pane2: Pane){
+        const pane1Layout = pane1.layout
+        const pane2Layout = pane2.layout
+        const pane1Index = pane1Layout.cells.indexOf(pane1);
+        const pane2Index = pane2Layout.cells.indexOf(pane2);
+        pane1Layout.cells[pane1Index] = pane2;
+        pane2Layout.cells[pane2Index] = pane1;
+        pane1.layout = pane2Layout;
+        pane2.layout = pane1Layout;
+
+        const pane1Xoff = pane1.xoff
+        const pane1Yoff = pane1.yoff
+        const pane1Sx   = pane1.sx
+        const pane1Sy   = pane1.sy
+
+        pane1.xoff = pane2.xoff
+        pane1.yoff = pane2.yoff
+        pane1.sx = pane2.sx
+        pane1.sy = pane2.sy
+
+        pane2.xoff = pane1Xoff
+        pane2.yoff = pane1Yoff
+        pane2.sx = pane1Sx
+        pane2.sy = pane1Sy
+
+        pane1Layout.refreshDividers();
+        pane2Layout.refreshDividers();
+    }
     // used to recieve the touch event from the gate
 }
